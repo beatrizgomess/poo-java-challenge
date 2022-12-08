@@ -1,9 +1,14 @@
 import br.com.dio.challenge.domain.*;
+import br.com.dio.challenge.pattern.FacadeBootcamp;
 
 import java.time.LocalDate;
 
 public class Main {
     public static void main(String[] args) {
+
+        FacadeBootcamp facadeBootcamp = new FacadeBootcamp();
+
+
         Course course = new Course();
         course.setTitle("Curso Java");
         course.setDescription("Descrição carga Horaria");
@@ -32,7 +37,6 @@ public class Main {
         bootcamp.getContents().add(course1);
         bootcamp.getContents().add(mentoring1);
 
-
         System.out.println();
         Dev dev1 = new Dev();
         dev1.setName("Bea");
@@ -42,14 +46,10 @@ public class Main {
         System.out.println("Conteudos Inscritos: " + dev1.getSubscribedContent());
         dev1.toProgress();
 
+
         System.out.println("XP BEA - " + dev1.calculateXP());
         System.out.println("Conteudos Inscritos: " + dev1.getSubscribedContent());
         System.out.println("Conteudos Concluídos: " + dev1.getCompletedContents());
-
-
-
-
-
 
 
         System.out.println();
@@ -71,6 +71,25 @@ public class Main {
 
         System.out.println("Conteudos Inscritos: " + dev2.getSubscribedContent());
         System.out.println("Conteudos Concluídos: " + dev2.getCompletedContents());
+
+        System.out.println();
+        System.out.println();
+
+        System.out.println("DESING PATTERN - OBSERVER");
+
+        System.out.println("Notificação do sistema: ");
+        Bootcamp bootcamp3 = new Bootcamp("Python Developer", "Descrição do Bootcamp de Python");
+
+        System.out.println("Notificação para " + dev1.getName() + "ATENÇÃO: ");
+        dev1.enviarNotificacao(bootcamp3);
+
+        System.out.println("Notificação para " + dev2.getName() + " ATENÇÃO: ");
+        dev2.enviarNotificacao(bootcamp3);
+
+
+        facadeBootcamp.createBootcamp(bootcamp3);
+        //Sempre que crio um bootcamp, envio notificação para os observadores.
+        // Dentro do método createBootcamp, contém o método "notificarObservadores"
 
 
 

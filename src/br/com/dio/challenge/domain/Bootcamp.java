@@ -1,14 +1,20 @@
 package br.com.dio.challenge.domain;
 
 import java.time.LocalDate;
-import java.util.HashSet;
-import java.util.LinkedHashSet;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 
 import static br.com.dio.challenge.domain.Content.XP_PADRAO;
 
 public class Bootcamp {
+
+    public Bootcamp(String name, String description) {
+        this.name = name;
+        this.description = description;
+    }
+
+    public Bootcamp() {
+    }
+
     private String name;
     private String description;
     private LocalDate startData = LocalDate.now();
@@ -16,8 +22,6 @@ public class Bootcamp {
 
     private Set<Dev> subscribedDevs = new HashSet<>();
     private Set<Content> contents = new LinkedHashSet<>();
-
-
 
     public String getName() {
         return name;
@@ -77,6 +81,8 @@ public class Bootcamp {
     public int hashCode() {
         return Objects.hash(name, description, startData, finalDate, subscribedDevs, contents);
     }
+
+
 
 
 }

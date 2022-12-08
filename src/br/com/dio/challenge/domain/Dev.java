@@ -1,14 +1,13 @@
 package br.com.dio.challenge.domain;
 
-import java.util.LinkedHashSet;
-import java.util.Objects;
-import java.util.Optional;
-import java.util.Set;
+import br.com.dio.challenge.pattern.Observador;
 
-public class Dev {
+import java.util.*;
+
+public class Dev implements Observador {
 
     private String name;
-    private Set<Content> subscribedContent =  new LinkedHashSet<>();
+    private Set<Content> subscribedContent =  new LinkedHashSet<>(); //LinkedHashSet para que os valores sejam ordenados pelo inserção
     private Set<Content>  completedContents = new LinkedHashSet<>();
 
     public String getName() {
@@ -49,20 +48,7 @@ public class Dev {
         }
 
     }
-    /*
-    public void toProgressWithQuestion(){
-        Optional<Content> questionsList = this.questions.stream().findFirst();
-        if(questionsList.isPresent()){
-            this.questionsAnswered.add(questionsList.get());
-            this.questions.remove(questionsList.get());
 
-        }else{
-            System.err.println("Você não tem questões para responder");
-        }
-
-    }
-
-     */
     public double calculateXP(){
         return this.completedContents.stream()
                 .mapToDouble(Content::calculate_xp)
@@ -80,5 +66,11 @@ public class Dev {
     @Override
     public int hashCode() {
         return Objects.hash(name, subscribedContent, completedContents);
+    }
+
+    @Override
+    public void enviarNotificacao(Bootcamp bootcamp) {
+        System.out.println("==== Novo Bootcamp na plataforma ====");
+        System.out.println("Inscreva-se agora no " + bootcamp.getName() + "!!!");
     }
 }
